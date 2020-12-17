@@ -1,3 +1,8 @@
+/* Program Name: OOP 3200 - Java Lab 5 - BMI Calculator
+ * Authors: Ryan Clayson and Daniel Hinbest
+ * Date: December 17, 2020
+ * Description: A Calculator that acts as a BMI Calculator created using Javafx
+ */
 package ca.durhamcollege;
 
 import javafx.application.Application;
@@ -11,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import javax.swing.*;
@@ -21,25 +27,33 @@ public class Main extends Application
     @Override
     public void start(Stage primaryStage) throws Exception
     {
-        primaryStage.setTitle("Java Lab 5");
+        //Sets the title
+        primaryStage.setTitle("BMI Calculator");
 
+        // Creates a new GridPane
         GridPane gridPane = new GridPane();
 
-        Scene scene = new Scene(gridPane, 400, 480);
+        // Creates a scene
+        Scene scene = new Scene(gridPane, 400, 240);
         primaryStage.setScene(scene);
         primaryStage.show();
 
+        // Height Label/Textfield
         Label heightLabel = new Label("Height (m) ");
-        Label weightLabel = new Label("Weight (kg)");
-
         TextField heightField = new TextField();
+
+        // Weight Label/Textfield
+        Label weightLabel = new Label("Weight (kg)");
         TextField weightField = new TextField();
 
+        // Button to Calculate
         Button calculate = new Button("Calculate BMI");
 
+        // BMI Calculation Label/Textfield
         Label bmiLabel = new Label("BMI");
         TextField bmiField = new TextField();
 
+        // Button Logic to Calculate BMI
         class ButtonClickHandler implements EventHandler<ActionEvent>{
             @Override
             public void handle(ActionEvent event){
@@ -63,18 +77,27 @@ public class Main extends Application
         }
         calculate.setOnAction(new ButtonClickHandler());
 
+        // Container Creations for each label/textfield
         HBox heightBox = new HBox(10, heightLabel, heightField);
         HBox weightBox = new HBox(10, weightLabel, weightField);
+        HBox calcBox = new HBox(10, calculate);
         HBox bmiBox = new HBox(10, bmiLabel, bmiField);
 
+        // Styles
+        heightBox.setStyle("-fx-alignment: center;");
+        calcBox.setStyle("-fx-alignment: center;");
+        weightBox.setStyle("-fx-alignment: center;");
+        bmiBox.setStyle("-fx-alignment: center;");
+
+        //Form Layout
         gridPane.setVgap(10);
         gridPane.setHgap(10);
         gridPane.setPadding(new Insets(10));
-        calculate.setAlignment(Pos.CENTER);
 
+        // Adds all fields to the grid pane
         gridPane.add(heightBox, 0, 0);
         gridPane.add(weightBox,0,1);
-        gridPane.add(calculate, 0, 2);
+        gridPane.add(calcBox, 0, 2);
         gridPane.add(bmiBox, 0, 3);
         gridPane.setStyle("-fx-font-size: 20");
     }
